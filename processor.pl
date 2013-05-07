@@ -1,4 +1,4 @@
-consult('engarde.pl').
+:- include('world.pl').
 
 main :- init_engarde.
 
@@ -24,7 +24,7 @@ init_club_houses :-
 init_regiment_houses :-
 	regiment(Code, Description, _, _, _, _, _, _, _),
 	asserta(area( Code, [ 'The magnificent location of the ', Description ])).
-	
+
 init_positions :-
 	init_player_positions,
 	init_dame_positions.
@@ -62,11 +62,11 @@ look(AreaCode) :-
 
 whereis(Code, Description) :-
 	position(Code, area(AreaCode, Description)).
-	
+
 % respond simplifies writing a mixture of literals and variables
- 
+
 respond([]):-
   write('.'),nl,nl.
 respond([H|T]):-
   write(H),
-  respond(T).	
+  respond(T).

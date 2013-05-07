@@ -1,5 +1,6 @@
 % player( name, sibling_rank, rank, orphan-p, funds, allowance, father_title, title, soclvl).
 player(jldq, 'Jean Luc d\'Quintillon', first, nobleman, no, 500, 100, marquis, marquis, 8).
+player(mdo, 'Marc d\'Orc', first, nobleman, yes, 500, 100, duke, duke, 9).
 
 % club(abbreviation, name, min_soc_lvl, dues, status_pts_month, house_limit, gambling_divisor).
 
@@ -53,21 +54,21 @@ married_not_player( Dame_id, Name ) :-
 
 % regiment(abbreviation, name, arm, col, tcol, [majs], [capts], [ncos], [soldiers])
 
-regiment(gr, 'Guardia Real', infantery, none, none, [jlh], [], [],[]).   
-regiment(mdr, 'Mosqueteros del Rey', infantery,  none, none, [], [], [],[]). 
-regiment(gc, 'Guardia del Cardenal', infantery, none, none, [], [], [],[]).     
-regiment(gd, 'Guardia de Dragones', cavalry, none, none, [], [], [],[]).  
-regiment(cdr, 'Carabineros de la Reina', cavalry, none, none, [], [], [],[]).  
-regiment(cpc,'Coraceros del Príncipe de Condé', cavalry, none, none, [], [], [],[]).  
-regiment(cdd, 'Coraceros del Delfín', cavalry, none, none, [], [], [],[edr]).  
-regiment(ddm, 'Dragones del Gran Duque Maximiliano', cavalry, none, none, [], [], [],[]).  
-regiment(dpl, 'Dragones Ligeros de la Princesa Luisa', cavalry, none, none, [], [], [],[]).  
-regiment(mr, 'Marines Reales', infantery, none, none, [], [], [],[]).  
-regiment(mdp, 'Mosqueteros de la Picardía', infantery, none, none, [], [], [],[]).  
-regiment(r13, '13 Regimiento de Fusileros', infantery, none, none, [], [], [],[]).  
-regiment(r53, '53 Regimiento de Fusileros', infantery, none, none, [], [], [],[]).  
-regiment(r27, '27 Regimiento de Mosqueteros', infantery, none, none, [], [], [],[]).  
-regiment(r4, '4º Regimiento de Arcabuceros', infantery, none, none, [], [], [],[]).  
-regiment(r69, '69 Regimiento de Arcabuceros', infantery, none, none, [], [], [],[]).  
-regiment(rgc, 'Regimiento de Cadetes de la Gascuña', infantery, none, none, [], [], [],[]).  
+regiment(gr, 'Guardia Real', infantery, none, none, [jlh], [], [],[]).
+regiment(mdr, 'Mosqueteros del Rey', infantery,  none, none, [], [], [],[]).
+regiment(gc, 'Guardia del Cardenal', infantery, none, none, [], [], [],[]).
+regiment(gd, 'Guardia de Dragones', cavalry, none, none, [], [], [],[]).
+regiment(cdr, 'Carabineros de la Reina', cavalry, none, none, [], [], [],[]).
+regiment(cpc,'Coraceros del Príncipe de Condé', cavalry, none, none, [], [], [],[]).
+regiment(cdd, 'Coraceros del Delfín', cavalry, none, none, [], [], [],[edr]).
+regiment(ddm, 'Dragones del Gran Duque Maximiliano', cavalry, none, none, [], [], [],[]).
+regiment(dpl, 'Dragones Ligeros de la Princesa Luisa', cavalry, none, none, [], [], [],[]).
+regiment(mr, 'Marines Reales', infantery, none, none, [], [], [],[]).
+regiment(mdp, 'Mosqueteros de la Picardía', infantery, none, none, [], [], [],[]).
+regiment(r13, '13 Regimiento de Fusileros', infantery, none, none, [], [], [],[]).
+regiment(r53, '53 Regimiento de Fusileros', infantery, none, none, [], [], [],[]).
+regiment(r27, '27 Regimiento de Mosqueteros', infantery, none, none, [], [], [],[]).
+regiment(r4, '4º Regimiento de Arcabuceros', infantery, none, none, [], [], [],[]).
+regiment(r69, '69 Regimiento de Arcabuceros', infantery, none, none, [], [], [],[]).
+regiment(rgc, 'Regimiento de Cadetes de la Gascuña', infantery, none, none, [], [], [],[]).
 regiment(rcm, 'Regimiento de Cazadores de Montaña', infantery, none, none, [], [], [],[]).
