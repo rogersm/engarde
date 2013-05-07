@@ -1,5 +1,5 @@
 % player( name, sibling_rank, rank, orphan-p, funds, allowance, father_title, title, soclvl).
-player('Jean Luc d\'Quintillon', first, nobleman, no, 500, 100, marquis, marquis, 8).
+player(jldq, 'Jean Luc d\'Quintillon', first, nobleman, no, 500, 100, marquis, marquis, 8).
 
 % club(abbreviation, name, min_soc_lvl, dues, status_pts_month, house_limit, gambling_divisor).
 
