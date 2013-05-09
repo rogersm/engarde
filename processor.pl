@@ -13,33 +13,37 @@ init_areas :-
 	init_regiment_houses.
 
 init_player_houses :-
-	player(Code, Description, _, _, _, _, _, _, _, _),
-	asserta(area(Code, [ 'House of ', Description])).
+	forall(player(Code, Description, _, _, _, _, _, _, _, _),
+	       assertz(area(Code, [ 'House of ', Description]))).
 init_dame_houses :-
-	dame(Code, Description, _, _, _, _, _),
-	asserta(area(Code, [ 'House of the Dame ', Description ])).
+	forall(dame(Code, Description, _, _, _, _, _),
+	       assertz(area(Code, [ 'House of the Dame ', Description ]))).
 init_club_houses :-
-	club(Code, Description, _, _, _, _, _),
-	asserta(area( Code, [ 'The great club ', Description ])).
+	forall(club(Code, Description, _, _, _, _, _),
+	       assertz(area( Code, [ 'The great club ', Description ]))).
 init_regiment_houses :-
-	regiment(Code, Description, _, _, _, _, _, _, _),
-	asserta(area( Code, [ 'The magnificent location of the ', Description ])).
+	forall(regiment(Code, Description, _, _, _, _, _, _, _),
+	       assertz(area( Code, [ 'The magnificent location of the ', Description ]))).
 
 init_positions :-
 	init_player_positions,
 	init_dame_positions.
 
-init_player_positions :-
+player_origin_position(PlayerCode, AreaDescription) :-
 	player(PlayerCode, _, _, _, _, _, _, _, _, _),
-	area(AreaCode, AreaDescription),
-	PlayerCode == AreaCode,
-	assertz(position(PlayerCode, area(AreaCode, AreaDescription))).
+	area(PlayerCode, AreaDescription).
+
+init_player_positions :-
+	forall(player_origin_position(PlayerCode, AreaDescription),
+	       assertz(position(PlayerCode, area(PlayerCode, AreaDescription)))).
+
+dame_origin_position(DameCode, AreaDescription) :-
+	dame(DameCode, _, _, _, _, _, _),
+	area(DameCode, AreaDescription).
 
 init_dame_positions :-
-	dame(DameCode, _, _, _, _, _, _),
-	area(AreaCode, AreaDescription),
-	DameCode == AreaCode,
-	assertz(position(DameCode, area(AreaCode, AreaDescription))).
+	forall(dame_origin_position(DameCode, AreaDescription),
+	      assertz(position(DameCode, area(DameCode, AreaDescription)))).
 
 goto(Player, Area) :-
 	can_go(Player, Area),
