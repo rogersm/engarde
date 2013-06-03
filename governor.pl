@@ -1,40 +1,21 @@
-:- include('world.pl').
+:- include('world_db.pl').
+:- dynamic position/2.
 
 main :- init_engarde.
 
 init_engarde :-
-	init_areas,
 	init_positions.
 
-init_areas :-
-	init_player_houses,
-	init_dame_houses,
-	init_club_houses,
-	init_regiment_houses.
-
-init_player_houses :-
-	forall(player(Code, Description, _, _, _, _, _, _, _, _),
-	       assertz(area(Code, [ 'House of ', Description]))).
-init_dame_houses :-
-	forall(dame(Code, Description, _, _, _, _, _),
-	       assertz(area(Code, [ 'House of the Dame ', Description ]))).
-init_club_houses :-
-	forall(club(Code, Description, _, _, _, _, _),
-	       assertz(area( Code, [ 'The great club ', Description ]))).
-init_regiment_houses :-
-	forall(regiment(Code, Description, _, _, _, _, _, _, _),
-	       assertz(area( Code, [ 'The magnificent location of the ', Description ]))).
-
 init_positions :-
-	init_player_positions,
+	init_pc_positions,
 	init_dame_positions.
 
-player_origin_position(PlayerCode, AreaDescription) :-
-	player(PlayerCode, _, _, _, _, _, _, _, _, _),
+pc_origin_position(PlayerCode, AreaDescription) :-
+	pc(PlayerCode, _, _, _, _, _, _, _, _, _),
 	area(PlayerCode, AreaDescription).
 
-init_player_positions :-
-	forall(player_origin_position(PlayerCode, AreaDescription),
+init_pc_positions :-
+	forall(pc_origin_position(PlayerCode, AreaDescription),
 	       assertz(position(PlayerCode, area(PlayerCode, AreaDescription)))).
 
 dame_origin_position(DameCode, AreaDescription) :-
@@ -43,7 +24,8 @@ dame_origin_position(DameCode, AreaDescription) :-
 
 init_dame_positions :-
 	forall(dame_origin_position(DameCode, AreaDescription),
-	      assertz(position(DameCode, area(DameCode, AreaDescription)))).
+	       assertz(position(DameCode, area(DameCode, AreaDescription)))).
+
 
 goto(Player, Area) :-
 	can_go(Player, Area),
@@ -69,8 +51,35 @@ whereis(Code, Description) :-
 
 % respond simplifies writing a mixture of literals and variables
 
-respond([]):-
+respond([]) :-
   write('.'),nl,nl.
-respond([H|T]):-
+respond([H|T]) :-
   write(H),
   respond(T).
+
+% PC and dames relations
+
+married(PlayerCode, DameCode) :-
+	pc(PlayerCode, _, _, _, _, _, _, _, _, _),
+	dame(DameCode, _, _, _, _, PlayerCode, _), !.
+
+married(DameCode, PlayerCode) :-
+	pc(PlayerCode, _, _, _, _, _, _, _, _, _),
+	dame(DameCode, _, _, _, _, PlayerCode, _), !.
+
+lover(PlayerCode, DameCode) :-
+	pc(PlayerCode, _, _, _, _, _, _, _, _, _),
+	dame(DameCode, _, _, _, PlayerCode, _, _), !.
+
+lover(DameCode, PlayerCode) :-
+	pc(PlayerCode, _, _, _, _, _, _, _, _, _),
+	dame(DameCode, _, _, _, PlayerCode, _, _), !.
+
+dame_is(Dame, Attribute) :-
+	dame(Dame, _, _, Attributes, _, _, _),
+	member(Attribute, Attributes).
+
+rich(Dame) :- dame_is(Dame, rich).
+influential(Dame) :- dame_is(Dame, influential).
+beautiful(Dame) :- dame_is(Dame, beautiful).
+
