@@ -9,7 +9,7 @@ init_engarde :-
 	nl,
 	nl,
 	command_loop.
-	
+
 init_positions :-
 	init_pc_positions,
 	init_dame_positions.
@@ -144,6 +144,7 @@ intran_verb(hint) --> [hint].
 
 nounphrase(Type,Noun) --> det,noun(Type,Noun).
 nounphrase(Type,Noun) --> noun(Type,Noun).
+look :- write('You''re looking'), nl.
 
 det --> [the].
 det --> [a].
@@ -173,7 +174,7 @@ restsent(C,[W1|Ws]) :-
 
 readword(C,W,C1) :-         % Some words are single characters
   single_char(C),           % i.e. punctuation
-  !, 
+  !,
   name(W, [C]),             % get as an atom
   get0(C1).
 readword(C, W, C1) :-
@@ -182,11 +183,11 @@ readword(C, W, C1) :-
   number_word(C, W, C1, _). % convert it to a genuine number
 readword(C,W,C2) :-         % otherwise if character does not
   in_word(C, NewC),         % delineate end of word - keep
-  get0(C1),                 % accumulating them until 
-  restword(C1,Cs,C2),       % we have all the word     
+  get0(C1),                 % accumulating them until
+  restword(C1,Cs,C2),       % we have all the word
   name(W, [NewC|Cs]).       % then make it an atom
 readword(C,W,C2) :-         % otherwise
-  get0(C1),       
+  get0(C1),
   readword(C1,W,C2).        % start a new word
 
 restword(C, [NewC|Cs], C2) :-
@@ -205,7 +206,7 @@ single_char(0'.).
 
 
 in_word(C, C) :- C >= 0'a, C =< 0'z.
-in_word(C, L) :- C >= 0'A, C =< 0'Z, L is C  32.
+in_word(C, L) :- C >= 0'A, C =< 0'Z, L is C + 32.
 in_word(0'',0'').
 in_word(0'-,0'-).
 
@@ -213,7 +214,7 @@ in_word(0'-,0'-).
 % up the number until we hit a non-integer. Return this in C1,
 % and return the computed number in W.
 
-number_word(C, W, C1, Pow10) :- 
+number_word(C, W, C1, Pow10) :-
   is_num(C),
   !,
   get0(C2),

@@ -1,6 +1,6 @@
 % player( name, sibling_rank, rank, orphan-p, funds, allowance, father_title, title, soclvl).
-player(jldq, 'Jean Luc d''Quintillon', first, nobleman, no, 500, 100, marquis, marquis, 8).
-player(mdo, 'Marc d''Orc', first, nobleman, yes, 500, 100, duke, duke, 9).
+pc(jldq, 'Jean Luc d''Quintillon', first, nobleman, no, 500, 100, marquis, marquis, 8).
+pc(mdo, 'Marc d''Orc', first, nobleman, yes, 500, 100, duke, duke, 9).
 
 % club(abbreviation, name, min_soc_lvl, dues, status_pts_month, house_limit, gambling_divisor).
 
